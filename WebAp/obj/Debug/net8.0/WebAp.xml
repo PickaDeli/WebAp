@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebAp</name>
+    </assembly>
+    <members>
+        <member name="M:WebAp.Controllers.MessagesController.GetMessages">
+            <summary>
+            Gets all messages
+            </summary>
+            <returns>All messages</returns>
+        </member>
+        <member name="M:WebAp.Controllers.MessagesController.GetMessage(System.Int64)">
+            <summary>
+            Gets one message by id
+            </summary>
+            <param name="id"></param>
+            <returns>A message that corresponds to id</returns>
+        </member>
+        <member name="M:WebAp.Controllers.MessagesController.PutMessage(System.Int64,WebAp.Models.MessageDTO)">
+            <summary>
+            Modify existing message using id
+            </summary>
+            <param name="id"></param>
+            <param name="message"></param>
+            <returns>Updated message</returns>
+        </member>
+        <member name="M:WebAp.Controllers.MessagesController.PostMessage(WebAp.Models.MessageDTO)">
+            <summary>
+            Posts new message
+            </summary>
+            <param name="message"></param>
+            <returns>New message</returns>
+        </member>
+        <member name="M:WebAp.Controllers.MessagesController.DeleteMessage(System.Int64)">
+            <summary>
+            Deletes message using id.
+            </summary>
+            <param name="id"></param>
+            <returns>If succeeded, deletes message corresponding to id</returns>
+        </member>
+        <member name="M:WebAp.Controllers.UserController.GetUsers">
+            <summary>
+            Gets the information of all users in database
+            </summary>
+            <returns>List of</returns>
+        </member>
+        <member name="M:WebAp.Controllers.UserController.GetUser(System.String)">
+            <summary>
+            Gets a user using username
+            </summary>
+            <param name="username"></param>
+            <returns>User information for one user</returns>
+        </member>
+        <member name="M:WebAp.Controllers.UserController.PutUser(System.String,WebAp.Models.User)">
+            <summary>
+            Updates user's username
+            </summary>
+            <param name="username"></param>
+            <param name="user"></param>
+            <returns>Updated useraname</returns>
+        </member>
+        <member name="M:WebAp.Controllers.UserController.PostUser(WebAp.Models.User)">
+            <summary>
+            Add new user
+            </summary>
+            <param name="user"></param>
+            <returns>New user</returns>
+        </member>
+        <member name="M:WebAp.Controllers.UserController.DeleteUser(System.String)">
+            <summary>
+            Deletes user
+            </summary>
+            <param name="username"></param>
+            <returns>If user is found, deletes user from database</returns>
+        </member>
+        <member name="T:WebAp.Migrations.UpdateUserAndMessageModels">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.UpdateUserAndMessageModels.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.UpdateUserAndMessageModels.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.UpdateUserAndMessageModels.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebAp.Migrations.UpdateForeignKeyConstraints">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.UpdateForeignKeyConstraints.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.UpdateForeignKeyConstraints.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.UpdateForeignKeyConstraints.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebAp.Migrations.RemovedSalt">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.RemovedSalt.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.RemovedSalt.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.RemovedSalt.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebAp.Migrations.AddedSaltAndCredentials">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.AddedSaltAndCredentials.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.AddedSaltAndCredentials.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.AddedSaltAndCredentials.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebAp.Migrations.AddedSalNotNull">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.AddedSalNotNull.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.AddedSalNotNull.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.AddedSalNotNull.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebAp.Migrations.AddedSaltNull">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.AddedSaltNull.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.AddedSaltNull.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.AddedSaltNull.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebAp.Migrations.UdatePasswordLenght">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.UdatePasswordLenght.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.UdatePasswordLenght.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.UdatePasswordLenght.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebAp.Migrations.Annotations">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.Annotations.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.Annotations.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebAp.Migrations.Annotations.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
