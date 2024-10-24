@@ -41,36 +41,57 @@ vastausta tietokannasta.
 
 Toiminnallisuudet UserRepository
 - DeleteUserAsync
-  o Poistaa käyttäjän, mikäli sellainen on olemassa.
+  
+  Poistaa käyttäjän, mikäli sellainen on olemassa.
+  
 - GetUserAsync
-  o Hakee käyttäjän käyttäjänimen perusteella käyttäjän tiedot.
+  
+  Hakee käyttäjän käyttäjänimen perusteella käyttäjän tiedot.
+  
 - GetUsersAsync
-  o Hakee kaikkien käyttäjien tiedot.
+  
+  Hakee kaikkien käyttäjien tiedot.
+  
 - NewUserAsync
-  o Luo uuden käyttäjän.
+  
+  Luo uuden käyttäjän.
+  
 - UpdateUserAsync
-  o Päivittää käyttäjän tietoja.
+  
+  Päivittää käyttäjän tietoja.
   
 Toiminnallisuudet MessageRepository
+
 - DeleteMessageAsync
-  o Poistaa viestin, mikäli sellainen on olemassa.
+  
+  Poistaa viestin, mikäli sellainen on olemassa.
+  
 - GetMessageAsync(id)
-  o Hakee viestin id:n perusteella.
-  o Sisällyttää hakuun lähettäjän (Sender) ja vastaanottajan (Recipient).
-  o FirstOrDefaultAsync hakee ensimmäisen viestin, jossa on annettu id-
+  
+  Hakee viestin id:n perusteella.
+  Sisällyttää hakuun lähettäjän (Sender) ja vastaanottajan (Recipient).
+  FirstOrDefaultAsync hakee ensimmäisen viestin, jossa on annettu id-
   arvo
+  
 - GetMessagesAsync
-  o Hakee viimeisimmät 10 julkista viestiä, eli viestit, joissa vastaanottaja
+  
+  Hakee viimeisimmät 10 julkista viestiä, eli viestit, joissa vastaanottaja
   (Recipient) on null.
-  o Lajittelee viestit id:n mukaan arvojärjestykseen niin, että uusimmat
+  Lajittelee viestit id:n mukaan arvojärjestykseen niin, että uusimmat
   viestit (suurin id) näkyvät ensimmäisinä.
+  
 - GetMyReceivedMessagesAsync
-  o Hakee 10 viimeisintä viestiä, jossa vastaanottajana on käyttäjä itse.
-  o Vaihtoehtona on hakea myös käyttäjän id:n perusteella.
+  
+  Hakee 10 viimeisintä viestiä, jossa vastaanottajana on käyttäjä itse.
+  Vaihtoehtona on hakea myös käyttäjän id:n perusteella.
+  
 - NewMessageAsync
-  o Lisää uuden viestin.
+  
+  Lisää uuden viestin.
+  
 - UpdateMessageAsync
-  o Mahdollistaa vietin muokkaamisen, mikäli sellainen löytyy.
+  
+  Mahdollistaa vietin muokkaamisen, mikäli sellainen löytyy.
   
 Services
 Tämän kansion luokat hoitavat Data Transfer Objectien toiminnan ja liikuttavat tietoa
@@ -78,43 +99,46 @@ palvelimelta käyttäjän näkyville. Nämä luokat sisältävät eri funktioide
 keskustelee Repositories-kansion sekä Middleware- kansion luokkien kanssa. Käytännössä
 luokan varsinaisissa toiminnoissa kutsutaan aina repositorion toiminnallisuuksia, jotta tiedot
 päivittyvät/poistuvat tietokannasta asti.
-Esimerkiksi GetMessageAsync(long id) -funktio kutsuu IMessageRepositoryn
-GetMessageAsync(id)- funktiota, joka hakee viestin tietokannasta käyttäen viestin id:tä
-avaimena.
 
 Toiminnallisuudet UserService
 Luokan alussa määritellään käytettävä repositorio (rajapinta), tässä tapauksessa
 IUserRepositorio sekä autentikaatiopalvelu IUserAuthenticationService.
 
 - DeleteUserAsync
-  o Tarkistaa löytyykö käyttäjää käyttäjänimen perusteella tietokannasta ja
+  
+  Tarkistaa löytyykö käyttäjää käyttäjänimen perusteella tietokannasta ja
   poistaa sen, mikäli se löytyy.
-  o Tarkemmin sanottuna funktio on bool-tyyppinen totuus-arvo, joka käyttää parametrina käyttäjän käyttäjänimeä. Funktio tarkistaa IUserRepositorystä GetUserAsync-funktiolla käyttäjän olemassaolon. Jos käyttäjä löytyy, palautetaan IUserRepositoryn DeleteUserAsync -funktio, joka poistaa käyttäjän tietokannasta. Jos käyttäjää ei löydy, palautetaan false.
+
+  Tarkemmin sanottuna funktio on bool-tyyppinen totuus-arvo, joka käyttää parametrina käyttäjän käyttäjänimeä. Funktio tarkistaa IUserRepositorystä GetUserAsync-funktiolla käyttäjän          olemassaolon. Jos käyttäjä löytyy, palautetaan IUserRepositoryn DeleteUserAsync -funktio, joka poistaa käyttäjän tietokannasta. Jos käyttäjää ei löydy, palautetaan false.
 
 - GetUserAsync
-  o Tarkistaa löytyykö käyttäjää käyttäjänimen perusteella tietokannasta ja
+  
+  Tarkistaa löytyykö käyttäjää käyttäjänimen perusteella tietokannasta ja
   palauttaa käyttäjän UserDTO:n tarjoamat tiedot.
-  o  Tarkemmin sanottuna tässä funktiossa käytetään User-luokan DTO-oliota, jolloin salasana ja suola jäävät pois tiedonsiirrosta. Ensin kutsutaan IUserRepositoryn GetUserAsync-functiota käyttäen hakuehtona (parametrina) käyttäjänimeä. Jos käyttäjänimeä ei löydy, palautetaan null. Jos käyttäjänimi löytyy, palautetaan UserToDTO-olio. UserToDTO kääntää User-olion UserDTO-muotoon.
+  
+  Tarkemmin sanottuna tässä funktiossa käytetään User-luokan DTO-oliota, jolloin salasana ja suola jäävät pois tiedonsiirrosta. Ensin kutsutaan IUserRepositoryn GetUserAsync-functiota        käyttäen hakuehtona (parametrina) käyttäjänimeä. Jos käyttäjänimeä ei löydy, palautetaan null. Jos käyttäjänimi löytyy, palautetaan UserToDTO-olio. UserToDTO kääntää User-olion UserDTO-    muotoon.
 
 - GetUsersAsync
-  o Palauttaa listana kokoelman käyttäjien UserDTO tietoja.
-  o Kyseessä on siis IEnumerable Task, joka on rajapinta jolla määritellään tietojen läpikäynti. Se on erityisen hyödyllinen silloin, kun käsitellään suuria tietomääriä tai halutaan palauttaa kokoelmia ilman, että koko kokoelmaa ladataan muistiin kerralla. Tässä kokoelma käydään läpi foreach-silmukalla, joka listaa kaikki käyttäjät IUserRepositoryn tarjoamasta tietokannasta ja kääntää ne  UserToDTO:lla UserDTO-muotoon. Lopuksi palautetaan käyttäjät listana.
+  
+  Palauttaa listana kokoelman käyttäjien UserDTO tietoja.
+  
+  Kyseessä on siis IEnumerable Task, joka on rajapinta jolla määritellään tietojen läpikäynti. Se on erityisen hyödyllinen silloin, kun käsitellään suuria tietomääriä tai halutaan            palauttaa kokoelmia ilman, että koko kokoelmaa ladataan muistiin kerralla. Tässä kokoelma käydään läpi foreach-silmukalla, joka listaa kaikki käyttäjät IUserRepositoryn tarjoamasta         tietokannasta ja kääntää ne  UserToDTO:lla UserDTO-muotoon. Lopuksi palautetaan käyttäjät listana.
 
 - NewUserAsync
-  o Tarkistaa, onko käyttäjänimi vapaa. Jos on, lisää käyttäjälle
-  liittymispäivämäärän, päivämäärän, jolloin käyttäjä on ollut viimeksi
-  kirjautuneena, luo käyttäjäkohtaiset evästeet
-  UserAuthenticationServicessä ja palauttaa UserToDTO-olion ja
-  tallentaa tiedot tietokantaan käyttäen IUserRepositoryn tarjoamaa NewUser-funtiota.
+  
+  Tarkistaa, onko käyttäjänimi vapaa. Jos on, lisää käyttäjälle
+  liittymispäivämäärän, päivämäärän, jolloin käyttäjä on ollut viimeksi kirjautuneena, luo käyttäjäkohtaiset evästeet
+  UserAuthenticationServicessä ja palauttaa UserToDTO-olion ja tallentaa tiedot tietokantaan käyttäen IUserRepositoryn tarjoamaa NewUser-funtiota.
 
 - UpdateUserAsync
-  o Hakee tietokannasta käyttäjänimen perusteella tiedot ja päivittää ne
-  uusiin.
-  o Tämä on taas boolean-tyyppinen task, jossa ensin kutsutaan IUserRepositoryn GetUserAsync-funktiota hakemaan User-olion nykyiset tiedot. Jos tiedot löytyvät, päivitetään tiedot oliolle tallentaen ne dbUser-muuttujaan ja palautetaan IUserRepositoryn UpdateUserAsync-funktio dbUser parametrinään. Jos käyttäjää ei löydykään, palautetaan false.
+  
+  Hakee tietokannasta käyttäjänimen perusteella tiedot ja päivittää ne uusiin.
+  
+  Tämä on boolean-tyyppinen task, jossa ensin kutsutaan IUserRepositoryn GetUserAsync-funktiota hakemaan User-olion nykyiset tiedot. Jos tiedot löytyvät, päivitetään tiedot oliolle           tallentaen ne dbUser-muuttujaan ja palautetaan IUserRepositoryn UpdateUserAsync-funktio dbUser parametrinään. Jos käyttäjää ei löydykään, palautetaan false.
 
 - UserToDTO
-  o Tällä luodaan User-oliosta uusia UserDTO-olioita ja tätä
-  hyödynnetään tämän luokan toiminnoissa siirtämään tietoa.
+  
+  Tällä luodaan User-oliosta uusia UserDTO-olioita ja tätä hyödynnetään tämän luokan toiminnoissa siirtämään tietoa.
   
 Toiminnallisuudet MessageService
 Luokan alussa määritellään käytettävä reposiotorio (rajapinta), tässä tapauksessa
@@ -122,42 +146,57 @@ IMessageRepository sekä IUserRepository, jotta päästään käsiksi myös
 käyttäjätietoihin.
 
 - DeleteMessageAsync(id)
-  o Hakee tietokannasta viestin id:n perusteella viestin ja poistaa sen,
+  
+  Hakee tietokannasta viestin id:n perusteella viestin ja poistaa sen,
   mikäli sellainen löytyy.
-  o Kyseessä on boolean-tyyppinen totuusarvo-funktio, joka hakee viestin id:llä IMessageRepositoiosta GetMessageAsync-funktiolla kyseisesn viestin. Jos viesti löytyy, poistetaan se IMessageRepositorion DeleteMessageAsync- funktiolla. Jos viestiä ei löydy, palautetaan false.
+  
+  Kyseessä on boolean-tyyppinen totuusarvo-funktio, joka hakee viestin id:llä IMessageRepositoiosta GetMessageAsync-funktiolla kyseisesn viestin. Jos viesti löytyy, poistetaan se             IMessageRepositorion DeleteMessageAsync- funktiolla. Jos viestiä ei löydy, palautetaan false.
 
--GetMessageAsync
-  o Hakee tietokannasta viestin id:n perusteella viestin.
-  o Käytännössä palauttaa MessageToDTO:n kautta MessageDTO-olion, jonka tiedot on haettu IMessageReposioryn GetMessageAsync-funktiolla viestin id:tä käyttäen.
-  o MessageRepositoryn puolella on tähän funktioon vielä lisää logiikkaa, jotta viestin lähettäjä (Sender), mahdollinen vastaanottaja (Recipient) saadaan mukaan.
+- GetMessageAsync
+
+  Hakee tietokannasta viestin id:n perusteella viestin.
+  
+  Käytännössä palauttaa MessageToDTO:n kautta MessageDTO-olion, jonka tiedot on haettu IMessageReposioryn GetMessageAsync-funktiolla viestin id:tä käyttäen.
+  
+  MessageRepositoryn puolella on tähän funktioon vielä lisää logiikkaa, jotta viestin lähettäjä (Sender), mahdollinen vastaanottaja (Recipient) saadaan mukaan.
 
 - GetMessagesAsync
-  o Hakee viimeisimmät 10 julkista viestiä, eli viestit, joissa vastaanottaja (Recipient) on null ja lajittelee viestit id:n mukaan arvojärjestykseen niin, että uusimmat viestit (suurin id) näkyvät ensimmäisinä.
-  o MessageRepositoryssä on tähänkin funktioon lisää logiikkaa, joka ottaa vastaanottajan mukaan tietoihin ja katsoo, että vastaanottaja on tosiaan null, etteivät kenenkään yksityisviestit tulostu mukaan.
-  o MessageServicen puolella taas kyseessä on IEnumerable task, kun käydään isoa datamassaa läpi. Tässä seulotaan läpi IMessageRepositoryn tarjoama GetMessagesAsync-funktio ja lisätään sopivat viestit listaan. 
+  
+  Hakee viimeisimmät 10 julkista viestiä, eli viestit, joissa vastaanottaja (Recipient) on null ja lajittelee viestit id:n mukaan arvojärjestykseen niin, että uusimmat viestit (suurin id)    näkyvät ensimmäisinä.
+  
+  MessageRepositoryssä on tähänkin funktioon lisää logiikkaa, joka ottaa vastaanottajan mukaan tietoihin ja katsoo, että vastaanottaja on tosiaan null, etteivät kenenkään yksityisviestit     tulostu mukaan.
+  
+  MessageServicen puolella kyseessä on IEnumerable task, kun käydään isoa datamassaa läpi. Tässä seulotaan läpi IMessageRepositoryn tarjoama GetMessagesAsync-funktio ja lisätään              sopivat viestit listaan. 
 
 - NewMessageAsync
-  o Tallentaa uuden viestin tietokantaan.
-  o  Tässä ensin parametrina annettu MessageDTO-olio muutetaan DTOToMessageAsync-funktiolla Message-olioksi, joka sitten tallennetaan tietokantaan IMessageRepositoyn NewMessageAsync-funktiota käyttäen. Ehkä. Monimutkainen rakenne.
+  Tallentaa uuden viestin tietokantaan.
+  
+  Tässä ensin parametrina annettu MessageDTO-olio muutetaan DTOToMessageAsync-funktiolla Message-olioksi, joka sitten tallennetaan tietokantaan IMessageRepositoyn NewMessageAsync-funktiota   käyttäen. Ehkä. Monimutkainen rakenne.
 
 - UpdateMessageAsync
-  o Hakee tietokannasta viestin id:n perusteella ja päivittää viestin.
-  o Tämä on boolean-tyyppinen totuusarvo task, jossa ensin tarkistetaan, löytyykö tällä id:llä olevaa viestiä tietokannasta kutsuen IMessgeRepositoryn GetMessageAsync-funktiota. Jos viesti löytyy, tallennetaan viestiin uusi otsikko ja body, jonka jälkeen kutsutaan IMessageRepositoryn UpdateMessageAsync-funktiota ja päivitetään viestin sisältö tietokantaan. Jos viestiä ei löydy, palautetaan false.
+  
+  Hakee tietokannasta viestin id:n perusteella ja päivittää viestin.
+  
+  Tämä on boolean-tyyppinen totuusarvo task, jossa ensin tarkistetaan löytyykö tällä id:llä olevaa viestiä tietokannasta kutsuen IMessgeRepositoryn GetMessageAsync-funktiota. Jos viesti      löytyy, tallennetaan viestiin uusi otsikko ja body, jonka jälkeen kutsutaan IMessageRepositoryn UpdateMessageAsync-funktiota ja päivitetään viestin sisältö tietokantaan. Jos viestiä ei     löydy, palautetaan false.
 
 - MessageToDTO
-  o Luodaan Message-objektista MessageDTO-olioita, joita hyödynnetään
-  tiedon tallentamisessa tietokantaan.
-  o Tässä otetaan huomioon myös mahdollisuus viestin vastaanottajaan
-  (Recipient) sekä viittaus edelliseen viestiin (PrevMessageId).
+  
+  Luodaan Message-objektista MessageDTO-olioita, joita hyödynnetään tiedon tallentamisessa tietokantaan.
+  
+  Tässä otetaan huomioon myös mahdollisuus viestin vastaanottajaan (Recipient) sekä viittaus edelliseen viestiin (PrevMessageId).
 
 - DTOToMessageAsync
-  o Luo uuden viestin id:n, titlen ja bodyn MessageDTO-olioon
-  o Varmistaa, että viestin lähettäjä tallentuu Sender-kenttään
-  o Tarkistaa, onko viestillä vastaanottajaa (Recipient) ja tallentaa sen
-  o Tarkistaa, viitataanko viestillä johonkin edelliseen viestiin ja tallentaa
-  sen id:n
+  
+  Luo uuden viestin id:n, titlen ja bodyn MessageDTO-olioon
+  
+  Varmistaa, että viestin lähettäjä tallentuu Sender-kenttään
+  
+  Tarkistaa, onko viestillä vastaanottajaa (Recipient) ja tallentaa sen
+  
+  Tarkistaa, viitataanko viestillä johonkin edelliseen viestiin ja tallentaa sen id:n
   
 Controllers
+
 Tässä kansiossa on kaksi controlleria, yksi viesteille ja toinen käyttäjille. Nämä controllerit ovat osa ASP.NET Core-sovellusta ja toimivat API-ohjaimina. Controllerit käsittelevät http-pyyntöjä ja palauttavat vastauksia.
 Alussa controllerille määritellään reitti, jonka jälkeen annetaan käytettävissä olevat
 rajapinnat, esim. UsersControlerilla on käytössä IUserService.
@@ -166,6 +205,7 @@ toiminnot, joita nyt tämän harjoituksen aikana Postmanin kautta käytettiin. N
 kutsutaan noita Service-rajapinnan funktioita tekemään tehtävänsä.
 
 Middleware
+
 Tässä kansiossa on turvallisuuteen liittyviä toimintoja.
 
 - ApiKeyMiddlewarella saadaan rajapinta-avaimen arvo haettua
